@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Team Potluck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script defer src="assets/script.js"></script>
+  <style>
+    :root { --primary: #0f172a; --accent: #facc15; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--primary);
+      color: #fff;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: var(--primary);
+      box-shadow: 0 2px 10px #0006;
+    }
+    nav a:hover { color: var(--accent); }
+    html { scroll-snap-type: y mandatory; }
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    #countdown {
+      display: inline-block;
+      padding: 18px 32px;
+      margin-top: 20px;
+      font-size: 1.5em;
+      /* background: rgba(255,255,255,0.85); */
+      background: transparent;
+      color: var(--green);
+      border: 3px solid rgb(176, 163, 18);
+      border-radius: 16px;
+      font-weight: bold;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      letter-spacing: 1px;
+    }
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: 2px solid var(--accent);
+      padding: 10px 24px;
+      border-radius: 8px;
+      transition: .3s;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: var(--accent);
+      color: #000;
+    }
+    .category-banner {
+  /* background-color: white; */
+  background: transparent;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: var(--green);
+  border: 2px solid yellow;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.2s;
+}
+
+.category-banner:hover, .category-banner.active {
+  background-color: rgb(22, 243, 26);
+  color: white;
+  cursor: pointer;
+}
+    .emoji-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+      font-size: 2rem;
+    }
+    .emoji {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.emoji:nth-child(1)  { top: 10%; left: 5%; animation-delay: 0s; }
+.emoji:nth-child(2)  { top: 20%; left: 15%; animation-delay: 1s; }
+.emoji:nth-child(3)  { top: 40%; left: 30%; animation-delay: 2s; }
+.emoji:nth-child(4)  { top: 60%; left: 45%; animation-delay: 3s; }
+.emoji:nth-child(5)  { top: 80%; left: 60%; animation-delay: 4s; }
+.emoji:nth-child(6)  { top: 30%; left: 75%; animation-delay: 5s; }
+.emoji:nth-child(7)  { top: 50%; left: 85%; animation-delay: 6s; }
+.emoji:nth-child(8)  { top: 70%; left: 10%; animation-delay: 7s; }
+.emoji:nth-child(9)  { top: 15%; left: 50%; animation-delay: 8s; }
+.emoji:nth-child(10) { top: 85%; left: 20%; animation-delay: 9s; }
+.emoji:nth-child(11) { top: 45%; left: 90%; animation-delay: 10s; }
+.emoji:nth-child(12) { top: 25%; left: 40%; animation-delay: 11s; }
+    @keyframes float {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-40px) rotate(15deg); }
+}
+  </style>
+</head>
+<body>
+  <div class="emoji-bg" aria-hidden="true">
+    <div class="emoji">🍕</div>
+    <div class="emoji">🍔</div>
+    <div class="emoji">🍩</div>
+    <div class="emoji">🍓</div>
+    <div class="emoji">🍣</div>
+    <div class="emoji">🧁</div>
+    <div class="emoji">🍇</div>
+    <div class="emoji">🥐</div>
+    <div class="emoji">🍟</div>
+    <div class="emoji">🍦</div>
+    <div class="emoji">🥞</div>
+    <div class="emoji">🍒</div>
+  </div>
+
+
+<!-- nav bar -->
+   <nav class="bg-primary text-white p-4 fixed w-full top-0 z-50 shadow-lg">
+    <div class="flex justify-between items-center container mx-auto">
+      <h1 class="text-2xl font-bold">Core COE</h1>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-accent">Home</a>
+        <a href="#menu" class="hover:text-accent">Menu</a>
+        <a href="#signup" class="hover:text-accent">Sign-Up</a>
+        <a href="#photos" class="hover:text-accent">Photos</a>
+      </div>
+    </div>
+  </nav>
+
+
+<!-- home section -->
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center pt-24">
+    <h2 class="text-5xl font-bold mb-4 text-accent">You’re Invited to the Potluck! 🎉</h2>
+    <p class="text-xl mb-6">Let’s share great food & great company</p>
+    <p id="countdown"></p> 
+      <div style="background:transparent; border: 3px solid var(--green); display: inline-block; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 10px; width: 60%; max-width: 600px;"> 
+        <p><i class="fas fa-calendar-alt" style="color: var(--green); margin-right: 8px;"></i><strong style="color: var(--green);">August 8, 2025</strong></p> 
+        <p><i class="fas fa-clock" style="color: var(--green); margin-right: 8px;"></i><strong style="color: var(--green);">12:00 PM onwards</strong></p> 
+        <p><i class="fas fa-map-marker-alt" style="color: var(--green); margin-right: 8px;"></i><strong style="color: var(--green);">Office Cafeteria, 3rd Floor</strong></p> 
+    <!-- <div id="countdown" class="text-3xl font-mono mb-8"></div> -->
+    <button id="rsvpJump">RSVP Now</button>
+  </section>
+
+
+  <!-- menu section -->
+  <section id="menu" class="py-24 container mx-auto text-center">
+    <h2 class="text-4xl font-semibold mb-10 text-accent;" style="margin-bottom: 10px;">🍰 What We’re Bringing</h2>
+    <p style="font-size: 1.1em; max-width: 600px; margin: 0 auto 15px;">Check out the delicious spread your colleagues are bringing!</p>
+    <!-- <div id="menuList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 w-full max-w-5xl"></div> -->
+<!-- Banners -->
+<div id="categoryFilters" style="display: flex; gap: 80px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+    <div class="category-banner" data-category="Starter" style="cursor: pointer;">Starter</div>
+    <div class="category-banner" data-category="Main Course" style="cursor: pointer;">Main Course</div>
+    <div class="category-banner" data-category="Dessert" style="cursor: pointer;">Dessert</div>
+    <div class="category-banner" data-category="Drink" style="cursor: pointer;">Drink</div>
+  </div>
+  
+  <!-- Table -->
+  <div style="max-width: 700px; margin: 0 auto; height: 300px; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: white;">
+    <table id="dishTable" style="width: 100vh; border-collapse: collapse;">
+      <thead style="background-color: var(--green); color: white; position: sticky; top: 0;">
+        <tr>
+          <th style="padding: 12px;">Name</th>
+          <th style="padding: 12px;">Dish</th>
+          <th style="padding: 12px;">Category</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+    
+</section>
+
+
+
+<!-- signup section -->
+  <section id="signup"  class="py-24 container mx-auto text-center">
+    <h2 class="text-4xl font-semibold mb-6 text-accent" style="margin-bottom: 30px;">🥗 Be part of the Fest!!</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 65px; max-width: 1500px; margin: auto; align-items: stretch;">
+      
+      <!-- Left: Fun Message -->
+      <div style="flex: 1; min-width: 350px; min-height: fit-content; text-align: left; background:   rgba(201, 226, 225, 0.85); padding: 18px 34px; border-radius: 40px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+        <h3 style="color: white; font-size: 1.5em;">Why Should You Join? </h3>
+        <ul style="list-style: none; padding: 0; font-size: 1em; color: #333; line-height: 1.6;">
+          <li>🍛 Free food, and lots of it!</li>
+          <li>🎤 Games, laughter, and great vibes</li>
+          <li>🧑‍🤝‍🧑 A chance to bond with teammates</li>
+          <li>📸 Fun photo moments</li>
+          <li>🥇 Mini competitions with surprises!</li>
+        </ul>
+        <p style="margin-top: 12px; font-weight: bold; color: var(--green); font-size: 1.1em;">Don't just hear about it later... be part of it! ✨</p>
+      </div>
+  
+      <!-- Right: Form -->
+      <div style="flex: 1; min-width: 350px; min-height: fit-content; text-align: left;  background:   rgba(201, 226, 225, 0.85); padding: 18px 34px; border-radius: 40px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+        <form id="rsvpForm" >
+          <div style="margin-bottom: 10px;">
+            <label for="name" style="font-weight: bold;">Your Name</label><br/>
+            <input type="text" id="name" name="name" required class="text-black p-2 rounded" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+          </div>
+  
+          <div style="margin-bottom: 10px;">
+            <label for="dish" style="font-weight: bold;">Dish You're Bringing</label><br/>
+            <input type="text" id="dish" name="dish" required class="text-black p-2 rounded" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+          </div>
+  
+          <div style="margin-bottom: 20px;">
+            <label for="category" style="font-weight: bold;">Select a Category</label><br/>
+            <select id="category" name="category" required class="text-black p-2 rounded" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+              <option value="">-- Choose one --</option>
+              <option value="Starter">Starter</option>
+              <option value="Main Course">Main Course</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Drink">Drink</option>
+            </select>
+          </div>
+  
+          <button type="submit" style="background-color: transparent; color: rgb(234, 239, 239); padding: 12px 24px; border: 2px solid black; border-color:#EAEFEF; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%;">
+            Count Me In!
+          </button>
+          <div id="confirmation" style="margin-top: 20px; font-weight: bold; color: green;"></div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- <form id="dishForm" class="w-full max-w-lg mx-auto grid gap-4 bg-black bg-opacity-40 p-8 rounded-xl">
+      <input name="name" placeholder="Your Name" required class="text-black p-2 rounded">
+      <input name="dish" placeholder="Dish Name" required class="text-black p-2 rounded">
+      <select name="category" required class="text-black p-2 rounded">
+        <option value="" disabled selected>Category</option>
+        <option>Starters</option><option>Main Course</option><option>Desserts</option><option>Drinks</option>
+      </select>
+      <input type="file" name="photo" accept="image/*" class="text-white"/>
+      <button>Add to Menu</button>
+      <p id="dishMessage" class="message hidden text-green-400">✅ Dish added!</p>
+    </form> -->
+  </section>
+
+
+
+<!-- photos section -->
+  <section id="photos" class="py-24 container mx-auto text-center">
+    <h2 class="text-4xl font-semibold mb-10 text-accent">Potluck Photos</h2>
+    <p style="font-size: 1.1em;">We'll add fun moments from the event here!</p>
+  </section>
+
+  <footer class="text-center py-6 bg-primary">© 2025 Team Potluck</footer>
+
+  <script src="assets/script.js"></script>
+  <script>
+    function generateMenu(filteredCategory = null) {
+  const tableBody = document.querySelector("#dishTable tbody");
+  const potluckData = JSON.parse(localStorage.getItem("potluckList") || "[]");
+
+  tableBody.innerHTML = "";
+
+  const visibleItems = filteredCategory
+    ? potluckData.filter(item => item.category === filteredCategory)
+    : potluckData;
+
+  visibleItems.forEach(entry => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td style="padding: 10px; border-bottom: 1px solid #eee;">${entry.name}</td>
+      <td style="padding: 10px; border-bottom: 1px solid #eee;">${entry.dish}</td>
+      <td style="padding: 10px; border-bottom: 1px solid #eee;">${entry.category}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+// Filter logic
+let currentFilter = null;
+
+document.querySelectorAll(".category-banner").forEach(banner => {
+  banner.addEventListener("click", () => {
+    const category = banner.getAttribute("data-category");
+
+    // Toggle same banner (reset)
+    if (currentFilter === category) {
+      currentFilter = null;
+      document.querySelectorAll(".category-banner").forEach(b => b.classList.remove("active"));
+      generateMenu(); // Show all
+    } else {
+      currentFilter = category;
+      document.querySelectorAll(".category-banner").forEach(b => b.classList.remove("active"));
+      banner.classList.add("active");
+      generateMenu(category); // Show filtered
+    }
+  });
+});
+
+generateMenu();
+  </script>
+  </script>
+</body></html>
