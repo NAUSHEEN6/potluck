@@ -1,0 +1,59 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0f172a;
+  --accent: #facc15;
+}
+
+body {
+  background-color: var(--primary);
+  color: white;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+button {
+  background-color: var(--primary);
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+button:hover {
+  background-color: var(--accent);
+  color: black;
+}
+
+.emoji-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.emoji:nth-child(1)  { top: 10%; left: 5%; animation-delay: 0s; }
+.emoji:nth-child(2)  { top: 20%; left: 15%; animation-delay: 1s; }
+.emoji:nth-child(3)  { top: 40%; left: 30%; animation-delay: 2s; }
+.emoji:nth-child(4)  { top: 60%; left: 45%; animation-delay: 3s; }
+.emoji:nth-child(5)  { top: 80%; left: 60%; animation-delay: 4s; }
+.emoji:nth-child(6)  { top: 30%; left: 75%; animation-delay: 5s; }
+.emoji:nth-child(7)  { top: 50%; left: 85%; animation-delay: 6s; }
+.emoji:nth-child(8)  { top: 70%; left: 10%; animation-delay: 7s; }
+.emoji:nth-child(9)  { top: 15%; left: 50%; animation-delay: 8s; }
+.emoji:nth-child(10) { top: 85%; left: 20%; animation-delay: 9s; }
+.emoji:nth-child(11) { top: 45%; left: 90%; animation-delay: 10s; }
+.emoji:nth-child(12) { top: 25%; left: 40%; animation-delay: 11s; }
+
+@keyframes float {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-40px) rotate(15deg); }
+}
